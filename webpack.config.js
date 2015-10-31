@@ -1,11 +1,15 @@
 var
     path    = require('path'),
-    webpack = require('webpack');
+    webpack = require('webpack'),
+    routes  = require('./routes');
 
 exports.production = {
     entry: {
+        app: routes.APP_ENTRY
     },
     output: {
+        path: routes.APP_DEST,
+        filename: routes.APP_MINIFIED_OUT,
         publicPath: '/'
     },
     resolve: {
@@ -36,9 +40,12 @@ exports.dev = {
     devtool: 'eval',
     entry: [
         'webpack-dev-server/client?http://localhost:3000',
-        'webpack/hot/only-dev-server'
+        'webpack/hot/only-dev-server',
+        routes.APP_ENTRY
     ],
     output: {
+        path: routes.APP_VIRTUAL_DIR,
+        filename: routes.APP_OUT,
         publicPath: '/'
     },
     plugins: [
