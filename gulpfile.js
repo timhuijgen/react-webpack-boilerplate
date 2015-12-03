@@ -10,10 +10,21 @@ var gulp        = require('gulp'),
     webpack          = require('webpack'),
     webpackDevServer = require('webpack-dev-server'),
     webpackConfig    = require('./webpack.config.js'),
+    browserSync      = require('browser-sync'),
 
     routes             = require('./routes');
 
 var PRODUCTION = false;
+
+var use_browsersync = process.argv.indexOf('--browsersync') > -1;
+
+if (use_browsersync) {
+    browserSync.init({
+        proxy: 'localhost:3000',
+        notify: false,
+        open: false
+    });
+}
 
 gulp.task('production', function () {
     PRODUCTION = true;
