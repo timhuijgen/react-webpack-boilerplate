@@ -57,9 +57,10 @@ gulp.task('place_css', function () {
     gulp.src(routes.SASS_FILES)
         .pipe(sourcemaps.init())
         .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
-        .pipe(autoprefix("last 1 version", "> 1%", "ie 8"))
+        .pipe(autoprefix(["last 1 version", "> 1%", "ie 8"]))
         .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest(routes.CSS_DEST));
+        .pipe(gulp.dest(routes.CSS_DEST))
+        .pipe(browserSync.stream({match: '**/*.css'}));
 });
 
 gulp.task('watch_sass', function () {
